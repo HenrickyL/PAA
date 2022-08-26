@@ -72,5 +72,56 @@ $$n^{3\cdot \frac{1}{log_2(n)}}\Rightarrow n^{3\cdot( log_n(2))}\rightarrow \\(n
 $$\sum_{i=1}^n(2\cdot3^i - 4 \cdot i)\Rightarrow \sum_{i=1}^n(2\cdot3^i) - \sum_{i=1}^n(4 \cdot i) \rightarrow\\ 2\cdot\sum_{i=1}^n3^i - 4\cdot\sum_{i=1}^n i\rightarrow\\ 2\cdot\sum_{i=1}^n3^i - 4\cdot \frac{n\cdot(n+1)}{2} \rightarrow\\ 2\cdot(\sum_{i=1}^n3^i) - 4\cdot \frac{n\cdot(n+1)}{2}$$
 
 Daqui, temos $\sum_{i=1}^n3^i$, onde vamos usar, $\sum_{i=0}^{n}a^i = \frac{a^{n+1}-1}{a-1}$ para $a\neq 1$, porém, temos que ajustar o indice de $i=1$, Vou pular o passo e colocar direto a formula, $\sum_{i=1}^{n}a^i = \frac{a(a^{n}-1)}{a-1}$, logo,
-$$2\cdot(\sum_{i=1}^n3^i) - 4\cdot \frac{n\cdot(n+1)}{2} \Rightarrow 2\cdot\frac{3(3^{n}-1)}{3-1} - 4\cdot \frac{n\cdot(n+1)}{2}\rightarrow\\ \frac{6(3^{n}-1)}{2} - \frac{4\cdot n\cdot(n+1)}{2}\rightarrow\\ 3\cdot(3^{n}-1) - 2n\cdot(n+1)\rightarrow\\ 3\cdot(3^{n}-1) - 2n\cdot(n+1) \rightarrow\\ 3^{n+1}-3 -2n^2-2n \rightarrow\\3^{n+1} -(2n^2+2n+3)$$
+$$2\cdot(\sum_{i=1}^n3^i) - 4\cdot \frac{n\cdot(n+1)}{2} \Rightarrow 2\cdot\frac{3(3^{n}-1)}{3-1} - 4\cdot \frac{n\cdot(n+1)}{2}\rightarrow\\ \frac{6(3^{n}-1)}{2} - \frac{4\cdot n\cdot(n+1)}{2}\rightarrow\\ \frac{6(3^{n}-1)- 4\cdot n\cdot(n+1)}{2}\rightarrow\\\frac{6\cdot 3^{n}-6- 4n^2-4n}{2}\rightarrow\\\frac{2\cdot 3^{n+1}-6- 4n^2-4n}{2}$$
 
+4. 
+a)Prova por contradição
+
+**Se $p^2$ é par então p é par**
+
+Por contradição temos que mostrar que apartir de $P\rightarrow Q$, onde $Q=F$ e $P=V$, para 
+
+P: "$p^2 = 2m$, $\forall m \in \Z$" e
+
+Q: "$p = 2k$, $\forall k\in \Z$"
+
+Dai, partindo de um p impar, $p=2k+1, \ \ \forall k \in \Z$, aplicado em P, temos que encontrar um número impar. Assim,
+
+$$ p^2 \rightarrow (2k+1)^2 \rightarrow 4k^2+4k+1 \rightarrow \\ 2(2k^+2k) + 1 \Rightarrow p^2 = 2\cdot k'+1$$
+
+Ou seja, $p^2$ é impar, mas isso não pode. Logo contradição.
+
+Outra forma seria,
+
+$$p^2 = 2\cdot m, \ \ \forall m \in \Z \Rightarrow\\
+(2k+1)^2 = 2\cdot m \rightarrow 4k^2+4k+1 = 2\cdot m \rightarrow\\ m = \frac{4k^2 + 4k + 1}{2} \rightarrow\\ m = 2k^2 + 2k +\frac{1}{2}$$
+
+Aqui temos que $m \in \R$ e isso é uma contradição com a hipotese.
+
+
+
+b)Prova por indução
+
+Provar por indução $S_n = \sum_{i=1}^n  \frac{1}{i(i+1)} = \frac{1}{1.2}+\frac{1}{2.3}+...+\frac{1}{n(n+1)}$
+
+Temos que passar por dois passos, para provar por Indução, base da indução e passo indutivo. Ou seja, testar para o primeiro caso P(0) e achar para os proximos passos apartir dos anteriores P(n+1) = F(P(n)), ou seja, podemos achar o atual como uma função ou operação (F) do anterior.
+
+Esse somatório tem valor 
+$$\sum_{i=1}^n \frac{1}{i(i+1)} = \frac{n}{n+1}\\ \Rightarrow P_n = \frac{n}{n+1} \ \forall n\in N$$
+
+Assim,
+$$P_0 = \frac{0}{1}$$
+$$P_1 = \frac{1}{2}$$
+
+A base é verdadeira. Logo, para $P_k$,
+$$P_k = \frac{1}{2}+\frac{1}{6}+...+\frac{1}{k(k+1)} = \frac{k}{k+1}$$
+temos,
+$$P_{k+1} =  (\frac{1}{2}+\frac{1}{6}+...+\frac{1}{k(k+1)}) + \frac{1}{(k+1)((k+1)+1)}$$
+Aqui temos que $P_{k+1}$ em função de $P_k$.
+$$P_{k+1} =  P_k + \frac{1}{(k+1)((k+1)+1)}\Rightarrow\\ \frac{k}{k+1} + (\frac{1}{(k+1)((k+1)+1)})\rightarrow\\ \frac{k}{k+1} + \frac{1}{(k+1)(k+2)} \rightarrow\\\frac{k}{k+1}\cdot (\frac{k+2}{k+2}) + \frac{1}{(k+1)(k+2)}\rightarrow\\\frac{k(k+2)}{(k+1)(k+2)} + \frac{1}{(k+1)(k+2)}\rightarrow\\ \frac{k(k+2) + 1}{(k+1)(k+2)}\rightarrow\\\frac{k^2+2k+1}{(k+1)(k+2)}\rightarrow\\ \frac{(k+1)^2}{(k+1)(k+2)}\Rightarrow\\\therefore P_{k+1} =\frac{k+1}{k+2}$$
+
+Usando apenas operações sobre a ideia base achamos o valor de $P_k$, podemos perguntar aqui "ta certo? So vi um monte de conta e não faz sentido", mas está sim, se usarmos, $P_n = \frac{n}{n+1}$, podemos trocar n por n+1 e achar a fórmula esperada.
+
+$$P_{n+1} = \frac{(n+1)}{(n+1)+1}\Rightarrow\\ \therefore P_{n+1} = \frac{n+1}{n+2}$$
+
+Logo está provado.
