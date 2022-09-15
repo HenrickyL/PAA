@@ -30,6 +30,7 @@ class Solution:
                     memo[s[1:-1]] = len(s[1:-1])
                     memo[s] = len(s)
                     return True
+            self._isPalindrom(s[1:-1],memo)
             return False
             
 
@@ -43,9 +44,9 @@ class Solution:
                     return s  
             # if(self._isPalindrom(s[1:],memo)):
             #     return s[1:]                  
-            # elif(self._isPalindrom(s[:-1],memo)) :
+            # if(self._isPalindrom(s[:-1],memo)) :
             #     return s[:-1]                  
-            # elif(self._isPalindrom(s[1:-1],memo)):
+            # if(self._isPalindrom(s[1:-1],memo)):
             #     return s[1:-1]                  
             x = self._longestPalindrome(s[1:],memo) #bcd
             y = self._longestPalindrome(s[:-1],memo)#abc
