@@ -41,10 +41,10 @@ class Solution:
             if(s[0] == s[-1]):
                 if(memo.get(s[1:-1]) != None or self._isPalindrom(s[1:-1],memo)):
                     return s  
-            # if(self._isPalindrom(s[1:],memo)):
-            #     return s[1:]                  
-            # if(self._isPalindrom(s[:-1],memo)) :
-            #     return s[:-1]                  
+            if(self._isPalindrom(s[1:],memo)):
+                return s[1:]                  
+            if(self._isPalindrom(s[:-1],memo)) :
+                return s[:-1]                  
             if(self._isPalindrom(s[1:-1],memo)):
                 return s[1:-1]                  
             x = self._longestPalindrome(s[1:],memo) #bcd
