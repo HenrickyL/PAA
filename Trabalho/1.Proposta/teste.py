@@ -75,14 +75,3 @@ print(S.longestPalindrome("abb"))
 print(S.countPalind,'\t\t', S.count)
 print(S.longestPalindrome("zABBAzzABAtu_ABcBA_"))
 print(S.countPalind,'\t\t', S.count)
-
-
-
-
-
-
-
-
-
-
-
