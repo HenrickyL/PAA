@@ -29,6 +29,7 @@ class Solution:
                 if(isPalind):
                     memo[s[1:-1]] = len(s[1:-1])
                     memo[s] = len(s)
+                    print(memo)
                     return True
             return False
             
