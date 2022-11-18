@@ -1,0 +1,10 @@
+a,a*,True
+aab,c*a*b,True
+aaaa,c*a*,True
+abcx,.*,True
+abcxa,abcxa,True
+z,a*b*c*zk*,True
+xccc,xc*,True
+,.*,True
+dasdasjda,.*,True
+aaaax,.*a*,True

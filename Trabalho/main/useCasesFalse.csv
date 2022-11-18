@@ -1,0 +1,8 @@
+aaaa,a,False
+bbb,a*,False
+bbb,ca*,False
+bbb,b*c,False
+aaaab,.*a*x,False
+,b*ac*,False
+xaxaxa,x*a*,False
+dotatres,valve,False
