@@ -1,7 +1,6 @@
 from random import randint 
 class Match:
     _count = 0
-    _listAux = []
 
     @staticmethod
     def isMatchDP(text: str, pattern: str)-> bool:
@@ -58,7 +57,7 @@ class Match:
         get = lambda  : alphabet[randint(0,len(alphabet)-1)] 
         def gen(i:int)->str:
             if(cls._count<0):
-                return '*'
+                raise Exception(f'impossivel criar uma string de tamanho {size} com o patthern {pattern}')
             if(i>= len(pattern)):
              return ''
             if(i+1 < lenP and pattern[i+1]=='*'):
