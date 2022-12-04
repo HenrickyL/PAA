@@ -24,15 +24,13 @@ class Match:
     def isMatch(text, pattern):
         def dp(i, j):
             if j == len(pattern):
-                ans = i == len(text)
+                return i == len(text)
             else:
                 first_match = i < len(text) and pattern[j] in {text[i], '.'}
                 if j+1 < len(pattern) and pattern[j+1] == '*':
-                    ans =  dp(i, j+2) or first_match and dp(i+1, j)
+                    return  dp(i, j+2) or (first_match and dp(i+1, j))
                 else:
-                    ans = first_match and dp(i+1, j+1)
-
-            return ans
+                    return first_match and dp(i+1, j+1)
         return dp(0, 0)
 
 
@@ -49,7 +47,7 @@ class Match:
         return res
     
     @classmethod
-    def stringGenerateByPattern(cls, pattern: str, size: int)-> str:
+    def stringGenerateByPatternAndSize(cls, pattern: str, size: int)-> str:
         cls._count = size
         stackCharStar = []
         lenP = len(pattern)
@@ -79,4 +77,20 @@ class Match:
                 value = get() if pattern[i]=='.' else pattern[i]
                 cls._count -= 1
                 return value + gen(i+1)
+        return gen(0)
+
+    @classmethod
+    def stringGenerateByPattern(cls, pattern: str)-> str:
+        def gen(i: int):
+            if(i>= len(pattern)):
+                return ''
+            alphabet = list(map(chr, range(97, 123)))
+            if(i+1 < len(pattern) and pattern[i+1] == '*'):
+                current = pattern[i]*randint(0,10)
+                if(pattern[i] == '.'):
+                    current = ''.join(
+                        [alphabet[randint(0,len(alphabet)-1)] for _ in current])
+                return current + gen(i+2)
+
+            return (pattern[i] if pattern[i] != '.' else alphabet[randint(0,len(alphabet)-1)])  + gen(i+1)
         return gen(0)
