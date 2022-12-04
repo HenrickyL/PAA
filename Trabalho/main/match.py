@@ -1,5 +1,8 @@
 from random import randint 
 class Match:
+    _count = 0
+    _listAux = []
+
     @staticmethod
     def isMatchDP(text: str, pattern: str)-> bool:
         memo = {}
@@ -45,3 +48,36 @@ class Match:
             else:
                 res += get() if randint(0,100)%5 !=0 else '*'
         return res
+    
+    @classmethod
+    def stringGenerateByPattern(cls, pattern: str, size: int)-> str:
+        cls._count = size
+        stackCharStar = []
+        lenP = len(pattern)
+        alphabet = list(map(chr, range(97, 123)))
+        get = lambda  : alphabet[randint(0,len(alphabet)-1)] 
+        def gen(i:int)->str:
+            if(cls._count<0):
+                return '*'
+            if(i>= len(pattern)):
+             return ''
+            if(i+1 < lenP and pattern[i+1]=='*'):
+                stackCharStar.append(pattern[i])
+                next = gen(i+2)
+                currentSize = 0
+                if(len(stackCharStar)>1):
+                    currentSize = randint(0,cls._count)
+                else:
+                    currentSize = cls._count
+                stackCharStar.pop()
+                cls._count -= currentSize
+                current = pattern[i]*currentSize if currentSize >0 else ''
+                if(pattern[i]=='.'):
+                    current = ''.join([get() for _ in current])
+                prev = current
+                return prev + next
+            else:
+                value = get() if pattern[i]=='.' else pattern[i]
+                cls._count -= 1
+                return value + gen(i+1)
+        return gen(0)
