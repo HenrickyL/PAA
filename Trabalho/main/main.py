@@ -1,8 +1,8 @@
 from match import Match
-from datetime import datetime
+from time import perf_counter_ns as time
 from random import randint
-
-getTime = lambda : int(datetime.now().timestamp() * 10**6)
+#time_ns
+getTime = lambda : time() * 10**6
 
 
 
@@ -23,7 +23,7 @@ class Data:
 
 
 def GenerateData(isTrueResult= True):
-    lengs = [x for x in range(1,500,3)]
+    lengs = [x for x in range(1,800,3)]
     nMedia = 5
     data: list[Data] = []
     dataDP: list[Data] = []
@@ -33,20 +33,30 @@ def GenerateData(isTrueResult= True):
         pattern = Match.patternGenerateBySize(n)
         anotherPattern = Match.patternGenerateBySize(n)
        
-        text = Match.stringGenerateByPatternAndSize(pattern, aux)
+        text = Match.stringGenerateByPatternAndSize(pattern, n)
         res = False 
         #calculate (I)
         sumTime = 0
         for _ in range(nMedia):
             if(not isTrueResult):
                 pattern = anotherPattern
-            ini = getTime()
+            ini = time()
             res = Match.isMatch(text, pattern)
-            fin = getTime()
-            sumTime += fin - ini
-            print(f' {fin-ini}')
+            fin = time()
+            sumTime += (fin - ini)
         dtime = sumTime/nMedia
         data.append(Data(length=n, pattern=pattern, text=text, result=res, dTime=dtime))
+        #calculate (II)
+        sumTime = 0
+        for _ in range(nMedia):
+            if(not isTrueResult):
+                pattern = anotherPattern
+            ini = time()
+            res = Match.isMatchDP(text, pattern)
+            fin = time()
+            sumTime += (fin - ini)
+        dtime = sumTime/nMedia
+        dataDP.append(Data(length=n, pattern=pattern, text=text, result=res, dTime=dtime))
     
     with open(f'data{True if isTrueResult else False}.txt', 'w') as file:
         for d in data:
@@ -54,16 +64,22 @@ def GenerateData(isTrueResult= True):
     with open(f'data{True if isTrueResult else False}Info.txt', 'w') as file:
         for d in data:
             file.write(d.getValuesString()+'\n')
+    with open(f'data{True if isTrueResult else False}DP.txt', 'w') as file:
+        for d in dataDP:
+            file.write(d.getResultString()+'\n')
+    with open(f'data{True if isTrueResult else False}DPInfo.txt', 'w') as file:
+        for d in dataDP:
+            file.write(d.getValuesString()+'\n')
 
 if __name__ == "__main__" :
-    n= 700
-    p = Match.patternGenerateBySize(n)
-    p2 = Match.patternGenerateBySize(n)
-    t = Match.stringGenerateByPatternAndSize(p2,n+30)
-    print(f'pattern: {p2}\t\ttext: {t}')
-    a = getTime()
-    res = Match.isMatch(t,p)
-    b = getTime()
-    print(b-a, res)
-    # GenerateData()
-    # GenerateData(False)
+    # p = '.*a*b'
+    # t = Match.stringGenerateByPatternAndSize(p,500)+'x'
+    # print(p)
+    # print(t)
+
+    # a = getTime()
+    # res = Match.isMatch('aaai','a*')
+    # b = getTime()
+    # print(b-a, res)
+    GenerateData()
+    GenerateData(False)

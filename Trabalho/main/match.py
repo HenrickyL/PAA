@@ -20,6 +20,21 @@ class Match:
                 return memo[(i,j)]
         return match(0,0)
 
+    # @staticmethod
+    # def isMatch2(text, pattern):
+    #     stack = [(0,0)]
+    #     while(stack):
+    #         i,j = stack.pop()
+    #         if j == len(pattern):
+    #             return i == len(text)
+    #         else:
+    #             first_match = i < len(text) and pattern[j] in {text[i], '.'}
+    #             if j+1 < len(pattern) and pattern[j+1] == '*':
+    #                 inOut =  dp(i, j+2) or (first_match and dp(i+1, j))
+    #             else:
+    #                 return first_match and dp(i+1, j+1)
+    #     return dp(0, 0)
+
     @staticmethod
     def isMatch(text, pattern):
         def dp(i, j):
@@ -32,7 +47,6 @@ class Match:
                 else:
                     return first_match and dp(i+1, j+1)
         return dp(0, 0)
-
 
     @staticmethod
     def patternGenerateBySize(size: int)->str :
