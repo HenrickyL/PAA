@@ -2,29 +2,29 @@ from match import Match
 from time import perf_counter_ns as time
 from random import randint
 #time_ns
-getTime = lambda : time() * 10**6
+getMedia = lambda sum, n : (int)((sum/n))
 
 
 
 class Data:
-    def __init__(self, length: int, pattern: str, text: str, result: bool, dTime: float = 0) -> None:
-        self.length = length
+    def __init__(self, pattern: str, text: str, result: bool, dTime: float = 0) -> None:
         self.pattern = pattern
         self.text = text
         self.result = result
         self.dTime = dTime
 
+
     def getResultString(self)->str:
-        return f'{self.length}\t{self.dTime}'
+        return f'{len(self.text)}\t{len(self.pattern)}\t{self.dTime}'
 
     def getValuesString(self)->str:
-        return f'{self.length}\t{self.result}\t{self.text}\t{self.pattern}\t{self.dTime}'
+        return f'{self.result}\t{self.text}\t{self.pattern}\t{self.dTime}'
 
 
 
 def GenerateData(isTrueResult= True):
-    lengs = [x for x in range(1,800,3)]
-    nMedia = 5
+    lengs = [x for x in range(1,500)]
+    nMedia = 50
     data: list[Data] = []
     dataDP: list[Data] = []
     #generate data
@@ -33,7 +33,7 @@ def GenerateData(isTrueResult= True):
         pattern = Match.patternGenerateBySize(n)
         anotherPattern = Match.patternGenerateBySize(n)
        
-        text = Match.stringGenerateByPatternAndSize(pattern, n)
+        text = Match.stringGenerateByPattern(pattern)
         res = False 
         #calculate (I)
         sumTime = 0
@@ -44,8 +44,8 @@ def GenerateData(isTrueResult= True):
             res = Match.isMatch(text, pattern)
             fin = time()
             sumTime += (fin - ini)
-        dtime = sumTime/nMedia
-        data.append(Data(length=n, pattern=pattern, text=text, result=res, dTime=dtime))
+        dtime = getMedia(sumTime,nMedia)
+        data.append(Data(pattern=pattern, text=text, result=res, dTime=dtime))
         #calculate (II)
         sumTime = 0
         for _ in range(nMedia):
@@ -55,31 +55,31 @@ def GenerateData(isTrueResult= True):
             res = Match.isMatchDP(text, pattern)
             fin = time()
             sumTime += (fin - ini)
-        dtime = sumTime/nMedia
-        dataDP.append(Data(length=n, pattern=pattern, text=text, result=res, dTime=dtime))
+        dtime = getMedia(sumTime,nMedia)
+        dataDP.append(Data(pattern=pattern, text=text, result=res, dTime=dtime))
     
-    with open(f'data{True if isTrueResult else False}.txt', 'w') as file:
+    with open(f'IsMatch_With_Result_{True if isTrueResult else False}.txt', 'w') as file:
         for d in data:
             file.write(d.getResultString()+'\n')
-    with open(f'data{True if isTrueResult else False}Info.txt', 'w') as file:
+    with open(f'IsMatch_With_Result_{True if isTrueResult else False}_Info.txt', 'w') as file:
         for d in data:
             file.write(d.getValuesString()+'\n')
-    with open(f'data{True if isTrueResult else False}DP.txt', 'w') as file:
+    with open(f'IsMatch_With_Result_{True if isTrueResult else False}_in_DP.txt', 'w') as file:
         for d in dataDP:
             file.write(d.getResultString()+'\n')
-    with open(f'data{True if isTrueResult else False}DPInfo.txt', 'w') as file:
+    with open(f'IsMatch_With_Result_{True if isTrueResult else False}_in_DP_Info.txt', 'w') as file:
         for d in dataDP:
             file.write(d.getValuesString()+'\n')
 
 if __name__ == "__main__" :
-    # p = '.*a*b'
-    # t = Match.stringGenerateByPatternAndSize(p,500)+'x'
+    # p = 'a'#'.*a*b'
+    # t = 'a'#Match.stringGenerateByPatternAndSize(p,500)
     # print(p)
     # print(t)
 
-    # a = getTime()
-    # res = Match.isMatch('aaai','a*')
-    # b = getTime()
+    # a =  time()
+    # res = Match.isMatch(t,p)
+    # b =  time()
     # print(b-a, res)
     GenerateData()
     GenerateData(False)

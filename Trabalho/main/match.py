@@ -37,16 +37,16 @@ class Match:
 
     @staticmethod
     def isMatch(text, pattern):
-        def dp(i, j):
+        def match(i, j):
             if j == len(pattern):
                 return i == len(text)
             else:
                 first_match = i < len(text) and pattern[j] in {text[i], '.'}
                 if j+1 < len(pattern) and pattern[j+1] == '*':
-                    return  dp(i, j+2) or (first_match and dp(i+1, j))
+                    return  match(i, j+2) or (first_match and match(i+1, j))
                 else:
-                    return first_match and dp(i+1, j+1)
-        return dp(0, 0)
+                    return first_match and match(i+1, j+1)
+        return match(0, 0)
 
     @staticmethod
     def patternGenerateBySize(size: int)->str :
