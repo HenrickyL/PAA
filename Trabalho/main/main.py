@@ -1,7 +1,8 @@
 from match import Match
-from time import perf_counter_ns as time
+from time import time_ns as time
 from random import randint
 #time_ns
+#perf_counter_ns
 getMedia = lambda sum, n : (int)((sum/n))
 
 
@@ -18,7 +19,7 @@ class Data:
         return f'{len(self.text)}\t{len(self.pattern)}\t{self.dTime}'
 
     def getValuesString(self)->str:
-        return f'{self.result}\t{self.text}\t{self.pattern}\t{self.dTime}'
+        return f'{len(self.text)}\t{len(self.pattern)}\t{self.result}\t{self.text}\t{self.pattern}\t{self.dTime}'
 
 
 

@@ -34,4 +34,38 @@ $f(m) \in O(g(n)) \Rightarrow \exist c > 0 \ \ | \ \ f(n) \leq c\cdot g(n)$
 
 ----------------
 
-Dados T,P, como os tamanho de Text e Pattern, respectivamente. No pior caso temos a chamada **match**(i, j+2)
+Dados T,P, como os tamanho de Text e Pattern, respectivamente. No pior caso temos a chamada **match**(i, j+2) e  **match**(i+1, j), ou $\Theta(i,j+2)$ e $\Theta(i+1,j)$.
+
+* $\Theta(0,0) = \Theta(0,2) + \Theta(1,0)$
+  
+  * $\Theta(0,2) = \Theta(0,4) + \Theta(2,2)$
+  * $\Theta(1,0) = \Theta(1,2) + \Theta(2,0)$
+
+
+----------------
+
+### Propriedade da Combinação:
+
+* $\begin{pmatrix}n \\
+0 
+\end{pmatrix} = 1$
+
+* $\begin{pmatrix}n \\
+n 
+\end{pmatrix} = 1$
+
+* $\begin{pmatrix}n \\
+p
+\end{pmatrix} = \begin{pmatrix}n \\
+n-p
+\end{pmatrix}$
+
+* $\begin{pmatrix}n \\
+p
+\end{pmatrix} + \begin{pmatrix}n \\
+p+1
+\end{pmatrix} = \begin{pmatrix}n+1 \\
+p+1
+\end{pmatrix}$
+
+* $$\sum^n_{i=0} \begin{pmatrix}n\\i\end{pmatrix} = 2^n$$
