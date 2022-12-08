@@ -1,3 +1,8 @@
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });
+    </script>
+
 # PAA
 
 ## Análise Teórica
@@ -34,12 +39,9 @@ $f(m) \in O(g(n)) \Rightarrow \exist c > 0 \ \ | \ \ f(n) \leq c\cdot g(n)$
 
 ----------------
 
-Dados T,P, como os tamanho de Text e Pattern, respectivamente. No pior caso temos a chamada **match**(i, j+2) e  **match**(i+1, j), ou $\Theta(i,j+2)$ e $\Theta(i+1,j)$.
+Dados T,P, como os tamanho de Text e Pattern, respectivamente. No pior caso temos a chamada **match**(i, j+2) e  **match**(i+1, j), onde podemos definir com base em T e P da seguinte forma
 
-* $\Theta(0,0) = \Theta(0,2) + \Theta(1,0)$
-  
-  * $\Theta(0,2) = \Theta(0,4) + \Theta(2,2)$
-  * $\Theta(1,0) = \Theta(1,2) + \Theta(2,0)$
+$$\Theta(T - i)\ \ \ \text{e} \ \ \  \Theta(P-2j)$$
 
 
 ----------------
@@ -69,3 +71,11 @@ p+1
 \end{pmatrix}$
 
 * $$\sum^n_{i=0} \begin{pmatrix}n\\i\end{pmatrix} = 2^n$$
+
+---------------------
+
+Forma Básica:  
+$$T(N) = c \cdot b ^{aN} \cdot N^d \cdot log^eN$$
+$$log(T(N)) = log(c) + a\cdot N \cdot log(b) + d \cdot log(N) + e\cdot log logN$$
+
+$$ \in \begin{cases} \Theta(N) & b^a > 1 \\ \Theta(log N) & b^a=1,\ d>0 \\ \Theta(log log N) & b^a =1,\ d=1 \end{cases} $$

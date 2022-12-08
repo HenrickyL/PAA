@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Analise.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<script type="text/javascript" 
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });
+</script>
+<h1 id="paa">PAA</h1>
+<h2 id="an%C3%A1lise-te%C3%B3rica">Análise Teórica</h2>
+<p>$$\text{ \textbf{Forma Básica:  }} \  \ c\cdot b^{an}\cdot n^d \cdot \log^e n$$</p>
+<p>Ordem de crescimento:</p>
+<ul>
+<li>maior $b^a$</li>
+<li>$b^a$ empata $\Rightarrow$ maior $d$</li>
+<li>$b^a$ e $d$ empata $\Rightarrow$ maior $e$</li>
+</ul>
+<p>Se $b^a \ &gt; \ 1 \ \ \Rightarrow T(n)\ \ \text{   Exponencial}$</p>
+<p>$f(m) \in \Theta(g(n)) \Rightarrow c_1\cdot g(n) \leq f(n) \leq c_2\cdot g(n)$</p>
+<p>$f(m) \in O(g(n)) \Rightarrow \exist c &gt; 0 \ \ | \ \ f(n) \leq c\cdot g(n)$</p>
+<hr>
+<p><strong>Definição:</strong> Dadas as strings <strong>text</strong> e <strong>pattern</strong> com tamanhos T e P, tal que $t_i$ e $p_j$ são elementos dada as posições, onde</p>
+<ul>
+<li>$0 \leq i &lt; T$</li>
+<li>$0 \leq j &lt; P$</li>
+<li><strong>text</strong> é formada por caracteres <code>{a..z}</code></li>
+<li><strong>pattern</strong> é formada por caracteres (<code>a..z, *, .</code>).
+<ul>
+<li><code>.</code> define um caractere qualquer em  (<code>a..z</code>)</li>
+<li><code>*</code> define 0 ou n repetições do caractere antecessor, este pertencendo a <code>.</code></li>
+</ul>
+</li>
+</ul>
+<p>Temos que <code>isMatch(text,pattern)</code> que retorna <code>Match(i,j)</code>, para $i=0$ e $j=0$, e este retorna se <strong>text</strong> é formada por <strong>pattern</strong> através do algoritmo.</p>
+<hr>
+<p>Dados T,P, como os tamanho de Text e Pattern, respectivamente. No pior caso temos a chamada <strong>match</strong>(i, j+2) e  <strong>match</strong>(i+1, j), ou $\Theta(i,j+2)$ e $\Theta(i+1,j)$.</p>
+<ul>
+<li>
+<p>$\Theta(0,0) = \Theta(0,2) + \Theta(1,0)$</p>
+<ul>
+<li>$\Theta(0,2) = \Theta(0,4) + \Theta(2,2)$</li>
+<li>$\Theta(1,0) = \Theta(1,2) + \Theta(2,0)$</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="propriedade-da-combina%C3%A7%C3%A3o">Propriedade da Combinação:</h3>
+<ul>
+<li>
+<p>$\begin{pmatrix}n \
+0
+\end{pmatrix} = 1$</p>
+</li>
+<li>
+<p>$\begin{pmatrix}n \
+n
+\end{pmatrix} = 1$</p>
+</li>
+<li>
+<p>$\begin{pmatrix}n \
+p
+\end{pmatrix} = \begin{pmatrix}n \
+n-p
+\end{pmatrix}$</p>
+</li>
+<li>
+<p>$\begin{pmatrix}n \
+p
+\end{pmatrix} + \begin{pmatrix}n \
+p+1
+\end{pmatrix} = \begin{pmatrix}n+1 \
+p+1
+\end{pmatrix}$</p>
+</li>
+<li>
+<p>$$\sum^n_{i=0} \begin{pmatrix}n\i\end{pmatrix} = 2^n$$</p>
+</li>
+</ul>
+<hr>
+<p>Forma Básica:<br>
+$$T(N) = c \cdot b ^{an} \cdot N^d \cdot log^eN$$
+$$log(T(N)) = log(c) + a\cdot n \cdot log(b) + d \cdot log(N) + e\cdot log logN$$</p>
+<p>$$ \in
+\begin{cases}
+\Theta(N) &amp; b^a &gt; 1 \
+\Theta(log N) &amp; b^a=1,\ d&gt;0 \
+\Theta(log log N) &amp; b^a =1,\ d=1
+\end{cases}
+$$</p>
+
+</body>
+</html>

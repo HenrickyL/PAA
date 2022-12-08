@@ -1,7 +1,7 @@
 from random import randint 
 class Match:
     _count = 0
-
+    #Solution
     @staticmethod
     def isMatchDP(text: str, pattern: str)-> bool:
         memo = {}
@@ -19,21 +19,6 @@ class Match:
                 memo[(i,j)] = first_match and match(i+1, j+1)
                 return memo[(i,j)]
         return match(0,0)
-
-    # @staticmethod
-    # def isMatch2(text, pattern):
-    #     stack = [(0,0)]
-    #     while(stack):
-    #         i,j = stack.pop()
-    #         if j == len(pattern):
-    #             return i == len(text)
-    #         else:
-    #             first_match = i < len(text) and pattern[j] in {text[i], '.'}
-    #             if j+1 < len(pattern) and pattern[j+1] == '*':
-    #                 inOut =  dp(i, j+2) or (first_match and dp(i+1, j))
-    #             else:
-    #                 return first_match and dp(i+1, j+1)
-    #     return dp(0, 0)
 
     @staticmethod
     def isMatch(text, pattern):
@@ -93,18 +78,19 @@ class Match:
                 return value + gen(i+1)
         return gen(0)
 
-    @classmethod
-    def stringGenerateByPattern(cls, pattern: str)-> str:
-        def gen(i: int):
-            if(i>= len(pattern)):
-                return ''
-            alphabet = list(map(chr, range(97, 123)))
-            if(i+1 < len(pattern) and pattern[i+1] == '*'):
-                current = pattern[i]*randint(0,10)
-                if(pattern[i] == '.'):
-                    current = ''.join(
-                        [alphabet[randint(0,len(alphabet)-1)] for _ in current])
-                return current + gen(i+2)
+@classmethod
+def stringGenerateByPattern(cls, pattern: str)-> str:
+    def gen(i: int):
+        if(i>= len(pattern)):
+            return ''
+        alphabet = list(map(chr, range(97, 123)))
+        if(i+1 < len(pattern) and pattern[i+1] == '*'):
+            current = pattern[i]*randint(0,10)
+            if(pattern[i] == '.'):
+                current = ''.join(
+                    [alphabet[randint(0,len(alphabet)-1)] for _ in current])
+            return current + gen(i+2)
 
-            return (pattern[i] if pattern[i] != '.' else alphabet[randint(0,len(alphabet)-1)])  + gen(i+1)
-        return gen(0)
+        return (pattern[i] if pattern[i] != '.' else alphabet[randint(0,len(alphabet)-1)])  + gen(i+1)
+    return gen(0)
+

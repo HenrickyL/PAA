@@ -4,11 +4,15 @@ from random import randint
 #time_ns
 #perf_counter_ns
 getMedia = lambda sum, n : (int)((sum/n))
+getTime = lambda : time()
 
 
 
 class Data:
-    def __init__(self, pattern: str, text: str, result: bool, dTime: float = 0) -> None:
+    def __init__(self, pattern: str,
+                     text: str, 
+                     result: bool, 
+                     dTime: float = 0) -> None:
         self.pattern = pattern
         self.text = text
         self.result = result
@@ -30,7 +34,6 @@ def GenerateData(isTrueResult= True):
     dataDP: list[Data] = []
     #generate data
     for n in lengs:
-        aux = n + randint(0,3)
         pattern = Match.patternGenerateBySize(n)
         anotherPattern = Match.patternGenerateBySize(n)
        
@@ -38,23 +41,23 @@ def GenerateData(isTrueResult= True):
         res = False 
         #calculate (I)
         sumTime = 0
+        if(not isTrueResult):
+            pattern = anotherPattern
         for _ in range(nMedia):
-            if(not isTrueResult):
-                pattern = anotherPattern
-            ini = time()
+            ini =getTime()
             res = Match.isMatch(text, pattern)
-            fin = time()
+            fin = getTime()
             sumTime += (fin - ini)
         dtime = getMedia(sumTime,nMedia)
         data.append(Data(pattern=pattern, text=text, result=res, dTime=dtime))
         #calculate (II)
         sumTime = 0
+        if(not isTrueResult):
+            pattern = anotherPattern
         for _ in range(nMedia):
-            if(not isTrueResult):
-                pattern = anotherPattern
-            ini = time()
+            ini = getTime()
             res = Match.isMatchDP(text, pattern)
-            fin = time()
+            fin = getTime()
             sumTime += (fin - ini)
         dtime = getMedia(sumTime,nMedia)
         dataDP.append(Data(pattern=pattern, text=text, result=res, dTime=dtime))
@@ -72,15 +75,7 @@ def GenerateData(isTrueResult= True):
         for d in dataDP:
             file.write(d.getValuesString()+'\n')
 
-if __name__ == "__main__" :
-    # p = 'a'#'.*a*b'
-    # t = 'a'#Match.stringGenerateByPatternAndSize(p,500)
-    # print(p)
-    # print(t)
 
-    # a =  time()
-    # res = Match.isMatch(t,p)
-    # b =  time()
-    # print(b-a, res)
+if __name__ == "__main__" :
     GenerateData()
     GenerateData(False)
