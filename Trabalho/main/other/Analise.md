@@ -43,8 +43,27 @@ Dados T,P, como os tamanho de Text e Pattern, respectivamente. No pior caso temo
 
 $$\Theta(T - i)\ \ \ \text{e} \ \ \  \Theta(P-2j)$$
 
+Isso pelo fato de P ser decrementado 2 a cada rodada e T 1 a cada rodada neste caso.
+
+Assim, se tomarmos por hipotese que a quantidade de operações da função `IsMatch` é definida por $\begin{pmatrix}i+j \\ i \end{pmatrix}$ Podemos definir a função e complexidade como,
+
+$$\sum_{i=0}^T \sum_{j=0}^\frac{P}{2} \begin{pmatrix}i+j \\ i \end{pmatrix} \Theta(T-i+P-2j)$$
+
+Dai,
+
+$$\Rightarrow \Theta(T+P)\sum_{i=0}^T \sum_{j=0}^\frac{P}{2} \begin{pmatrix}i+j \\ i \end{pmatrix}$$
+
+onde, utilizando a propriedade $\sum^n_{i=0} \begin{pmatrix}n\\i\end{pmatrix} = 2^n$, temos
+
+
+$$\Rightarrow O(\ (T+P)\cdot 2^{T+\frac{P}{2}})$$
 
 ----------------
+
+Para o algoritmo com Programação Dinâmica, temos T, P, como tamanhos e os indices i, j, respectivamente. O trabalho para processar match(i,j) é O(1) pelo fato da memorização, assim para $i=0,...,T$ e $j=0, ... ,P$ feito uma vez para cada, logo P e T operações O(1), logo
+
+$$O(TP)$$
+
 
 ### Propriedade da Combinação:
 
@@ -70,7 +89,7 @@ p+1
 p+1
 \end{pmatrix}$
 
-* $$\sum^n_{i=0} \begin{pmatrix}n\\i\end{pmatrix} = 2^n$$
+* $\sum^n_{i=0} \begin{pmatrix}n\\i\end{pmatrix} = 2^n$
 
 ---------------------
 
